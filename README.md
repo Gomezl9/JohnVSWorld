@@ -1,5 +1,6 @@
 <img width="1126" height="508" alt="image" src="https://github.com/user-attachments/assets/956c07fe-754f-47f6-b2e5-39230a0ca647" />
-<img width="1126" height="508" alt="image" src="https://github.com/user-attachments/assets/8ee3f44c-940c-4d07-92f2-a643c1728b81" /><img width="1047" height="477" alt="image" src="https://github.com/user-attachments/assets/aa74c7af-38b9-4cd0-a3b0-6aa7d7247cc9" />
+<img width="1126" height="508" alt="image" src="https://github.com/user-attachments/assets/8ee3f44c-940c-4d07-92f2-a643c1728b81" />
+<img width="1047" height="477" alt="image" src="https://github.com/user-attachments/assets/aa74c7af-38b9-4cd0-a3b0-6aa7d7247cc9" />
 JOHN VS WORLD
 # El juego esta basado en una combinacion entre el juego de BANANA y JETPACK JOYRIDE. El jugador va pasando por un mapa hasta llegar a eliminar minimo 20 rivales, esto ayuda a que el jugador crezca y pueda tener un tamaño considerable para que pueda enfrentar al BOSS, que es el enemigo más dificil de vencer.
 #
