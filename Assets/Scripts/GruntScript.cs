@@ -37,6 +37,24 @@ public class GruntScript : MonoBehaviour
     public void Hit()
     {
         Health -= 1;
-        if (Health == 0) Destroy(gameObject);
+
+        if (Health <= 0)
+        {
+            // Avisar al jugador para que crezca
+            JohnMovement john = John.GetComponent<JohnMovement>();
+            if (john != null)
+            {
+                john.Grow();
+            }
+
+            // Registrar la muerte en el EnemyManager (si lo estás usando)
+            GameObject manager = GameObject.Find("EnemyManager");
+            if (manager != null)
+            {
+                manager.GetComponent<EnemyManager>().RegisterKill();
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

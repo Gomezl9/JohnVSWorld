@@ -15,6 +15,9 @@ public class JohnMovement : MonoBehaviour
     private float LastShoot;
     private int Health = 5;
 
+    public int KillsBeforeGrow = 1;
+    private int KillCounter = 0;
+
     private void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -78,4 +81,10 @@ public class JohnMovement : MonoBehaviour
         Health -= 1;
         if (Health == 0) Destroy(gameObject);
     }
+
+    public void Grow()
+    {
+        transform.localScale += new Vector3(0.1f, 0.1f, 0);
+    }
+
 }

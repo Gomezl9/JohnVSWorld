@@ -35,14 +35,12 @@ public class BulletScript : MonoBehaviour
     {
         GruntScript grunt = other.GetComponent<GruntScript>();
         JohnMovement john = other.GetComponent<JohnMovement>();
-        if (grunt != null)
-        {
-            grunt.Hit();
-        }
-        if (john != null)
-        {
-            john.Hit();
-        }
+        BossScript boss = other.GetComponent<BossScript>();
+
+        if (grunt != null) grunt.Hit();
+        if (john != null) john.Hit();
+        if (boss != null) boss.Hit();
+
         DestroyBullet();
     }
 }
