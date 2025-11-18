@@ -6,12 +6,13 @@ public class EnemyManager : MonoBehaviour
     public GameObject EnemyPrefab;
     public GameObject BossPrefab;
 
-    public float SpawnDistance = 10f;
+    public float SpawnDistance = 10f;        
     public float DistanceBetweenSpawns = 15f;
+    public float EnemySpawnY = -2.7f;
 
     private float NextSpawnX;
     private int EnemiesKilled = 0;
-    private bool BossSpawned = false;   // <-- Para evitar 2 Bosses
+    private bool BossSpawned = false;
 
     void Start()
     {
@@ -20,6 +21,9 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
+        if (Player == null) return;
+
+        // Si el jugador ya pasó el punto de spawn → generar enemigos
         if (!BossSpawned && Player.position.x >= NextSpawnX)
         {
             SpawnEnemies();
@@ -31,12 +35,13 @@ public class EnemyManager : MonoBehaviour
     {
         if (BossSpawned) return;
 
-        int numEnemies = Random.Range(1, 4); // 1, 2 o 3 enemigos
+        int numEnemies = Random.Range(1, 4);
 
         for (int i = 0; i < numEnemies; i++)
         {
-            Vector3 pos = new Vector3(Player.position.x + 8 + i * 1.5f, -1.5f, 0);
-            Instantiate(EnemyPrefab, pos, Quaternion.identity);
+            float spawnX = Player.position.x + SpawnDistance + i * 2f;
+            Vector3 spawnPos = new Vector3(spawnX, EnemySpawnY, 0);
+            Instantiate(EnemyPrefab, spawnPos, Quaternion.identity);
         }
     }
 
@@ -44,7 +49,7 @@ public class EnemyManager : MonoBehaviour
     {
         EnemiesKilled++;
 
-        // Cuando se hayan muerto 20 enemigos → sale el Boss
+        // Cuando se hayan muerto 20 enemigos → aparece el Boss
         if (EnemiesKilled >= 20 && !BossSpawned)
         {
             SpawnBoss();
@@ -54,7 +59,7 @@ public class EnemyManager : MonoBehaviour
 
     void SpawnBoss()
     {
-        Vector3 pos = new Vector3(Player.position.x + 10f, -1.5f, 0);
+        Vector3 pos = new Vector3(Player.position.x + 10f, EnemySpawnY, 0);
         Instantiate(BossPrefab, pos, Quaternion.identity);
     }
 }

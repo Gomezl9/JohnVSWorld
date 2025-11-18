@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GruntScript : MonoBehaviour
@@ -10,13 +8,28 @@ public class GruntScript : MonoBehaviour
     private int Health = 3;
     private float LastShoot;
 
+    void Start()
+    {
+        // Si no está asignado en el inspector, se busca automáticamente
+        if (John == null)
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+                John = player.transform;
+        }
+    }
+
     void Update()
     {
         if (John == null) return;
 
         Vector3 direction = John.position - transform.position;
-        if (direction.x >= 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        else transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+
+        // Mirar al player
+        if (direction.x >= 0.0f)
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        else
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
 
         float distance = Mathf.Abs(John.position.x - transform.position.x);
 
@@ -40,18 +53,18 @@ public class GruntScript : MonoBehaviour
 
         if (Health <= 0)
         {
-            // Avisar al jugador para que crezca
+            // Hacer crecer al player
             JohnMovement john = John.GetComponent<JohnMovement>();
             if (john != null)
             {
                 john.Grow();
             }
 
-            // Registrar la muerte en el EnemyManager (si lo estás usando)
-            GameObject manager = GameObject.Find("EnemyManager");
+            // Registrar muerte en el EnemyManager
+            EnemyManager manager = FindObjectOfType<EnemyManager>();
             if (manager != null)
             {
-                manager.GetComponent<EnemyManager>().RegisterKill();
+                manager.RegisterKill();
             }
 
             Destroy(gameObject);
